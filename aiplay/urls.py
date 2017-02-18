@@ -16,15 +16,26 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework import routers
-
-from account.views import UserRegisterAPI, UserLoginAPI
-
+from rest_framework_jwt.views import (
+    obtain_jwt_token,
+    refresh_jwt_token,
+    verify_jwt_token,
+)
 router = routers.SimpleRouter()
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'register/', UserRegisterAPI.as_view()),
-    url(r'login/', UserLoginAPI.as_view()),
-    url(r'', include(router.urls))
+
+
+    # API
+    url(r'^accounts/', include('account.urls', namespace='accounts')),
+
+    # third party
+    url(r'^docs/', include('rest_framework_docs.urls')),
+    url(r'^api-token-auth/', obtain_jwt_token),
+    url(r'^api-token-refresh/', refresh_jwt_token),
+    url(r'^api-token-verify/', verify_jwt_token),
+
+    # url(r'', include(router.urls)),
 ]

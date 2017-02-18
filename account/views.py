@@ -15,19 +15,8 @@ class UserRegisterAPI(generics.GenericAPIView,
         return self.create(request)
 
 
-class UserLoginAPI(generics.GenericAPIView):
-    serializer_class = UserLoginSerializer
-
-    def post(self, request):
-        serializer = UserLoginSerializer(data=request.data)
-        if serializer.is_valid():
-            user = authenticate(**serializer.validated_data)
-            if not user:
-                return Response({'error': 'Invalid username or password'}, status=status.HTTP_400_BAD_REQUEST)
-            else:
-                login(request, user)
-                return Response({'username': user.username}, status=status.HTTP_202_ACCEPTED)
-        else:
-            return Response({'error': 'invalid request'}, status=status.HTTP_400_BAD_REQUEST)
-
+class TestViewAPI(APIView):
+    def get(self, request):
+        print(request.user)
+        return Response(None)
 
