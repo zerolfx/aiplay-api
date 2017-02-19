@@ -29,13 +29,14 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
 
 class UserAbstractView(serializers.ModelSerializer):
-
     class Meta:
         model = User
         fields = ('username', 'avatar', 'about')
 
 
-class UserLoginSerializer(serializers.Serializer):
-    username = serializers.CharField(max_length=30, error_messages={
-        'max_length': "Username can't be longer than 30 characters."})
-    password = serializers.CharField(max_length=150)
+class UserDetailView(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'avatar', 'about', 'birth_date', 'country', 'city', 'organization')
+        extra_kwargs = {'username': {'read_only': True}
+                        }
