@@ -1,14 +1,22 @@
 from django.shortcuts import render
+
 from rest_framework.views import APIView
-from .serializers import UserRegisterSerializer, UserLoginSerializer
 from rest_framework import mixins, generics, viewsets
 from rest_framework.response import Response
 from rest_framework import status
-from django.contrib.auth import login, authenticate
+
+from .serializers import (
+    UserRegisterSerializer,
+    UserLoginSerializer,
+    UserAbstractView
+)
+
+from .models import User
 
 
 class UserRegisterAPI(generics.GenericAPIView,
-                      mixins.CreateModelMixin):
+                      mixins.CreateModelMixin
+                      ):
     serializer_class = UserRegisterSerializer
 
     def post(self, request):
@@ -20,3 +28,8 @@ class TestViewAPI(APIView):
         print(request.user)
         return Response(None)
 
+
+class UserAbstractAPI(generics.RetrieveAPIView):
+    lookup_field = 'username'
+    queryset = User.objects.all()
+    serializer_class = UserAbstractView

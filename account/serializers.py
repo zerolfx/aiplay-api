@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, UserProfile
 from django.contrib.auth import authenticate
 from rest_framework.validators import UniqueTogetherValidator
 
@@ -20,11 +20,25 @@ class UserRegisterSerializer(serializers.ModelSerializer):
                         }
 
     def create(self, validated_data):
-        return User.objects.create_user(
+        user = User.objects.create_user(
             username=validated_data['username'],
             password=validated_data['password'],
             email=validated_data['email'],
         )
+        UserProfile.objects.create(user=user)
+        return user
+
+
+class UserAbstractView(serializers.ModelSerializer):
+    avatar = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        fields = ('username', 'avatar')
+        depth = 1
+
+    def get_avatar(self, obj):
+        return obj.userprofile.avatar
 
 
 class UserLoginSerializer(serializers.Serializer):
@@ -43,3 +57,4 @@ class UserLoginSerializer(serializers.Serializer):
     #
     # def retrieve(self, validated_data):
     #     return authenticate(**validated_data)
+
