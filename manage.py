@@ -3,6 +3,7 @@ import os
 import sys
 
 import django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "aiplay.settings")
 django.setup()
 
 if __name__ == "__main__":

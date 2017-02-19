@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, UserProfile
+from .models import User
 from django.contrib.auth import authenticate
 from rest_framework.validators import UniqueTogetherValidator
 
@@ -25,36 +25,17 @@ class UserRegisterSerializer(serializers.ModelSerializer):
             password=validated_data['password'],
             email=validated_data['email'],
         )
-        UserProfile.objects.create(user=user)
         return user
 
 
 class UserAbstractView(serializers.ModelSerializer):
-    avatar = serializers.SerializerMethodField()
 
     class Meta:
         model = User
-        fields = ('username', 'avatar')
-        depth = 1
-
-    def get_avatar(self, obj):
-        return obj.userprofile.avatar
+        fields = ('username', 'avatar', 'about')
 
 
 class UserLoginSerializer(serializers.Serializer):
     username = serializers.CharField(max_length=30, error_messages={
         'max_length': "Username can't be longer than 30 characters."})
     password = serializers.CharField(max_length=150)
-    #
-    # def validate(self, data):
-    #     user = authenticate(**data)
-    #     if not user:
-    #         raise serializers.ValidationError('Username or password is invalid.')
-    #     return data
-    #
-    # def create(self, validated_data):
-    #     return authenticate(**validated_data)
-    #
-    # def retrieve(self, validated_data):
-    #     return authenticate(**validated_data)
-
