@@ -8,7 +8,7 @@ def _random_avatar():
 
 
 class User(AbstractUser):
-    avatar = models.CharField(max_length=50, default=_random_avatar())
+    avatar = models.CharField(max_length=50, default=_random_avatar)
     about = models.CharField(max_length=100, blank=True, null=True)
     birth_date = models.DateField('Birth Date', blank=True, null=True)
     country = models.CharField('Country', max_length=30, blank=True)
