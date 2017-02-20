@@ -34,7 +34,7 @@ class Problem(models.Model):
 
 
 class Tag(models.Model):
-    name = models.CharField('Tag Name', max_length=20)
+    name = models.CharField('Tag Name', max_length=20, unique=True)
 
     def __str__(self):
         return self.name
