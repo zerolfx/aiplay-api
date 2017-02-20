@@ -1,7 +1,9 @@
 from rest_framework import generics, mixins
 
 from .serializers import ProblemSerializer, TagSerializer
-from .models import Problem, Tag
+from .models import Problem
+
+from tagging.models import Tag
 
 
 class ProblemCreateAPI(generics.CreateAPIView):
@@ -20,11 +22,10 @@ class ProblemDetailAPI(generics.GenericAPIView,
         return self.update(request, *args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        return self.retrieve(self, request, *args, **kwargs)
+        return self.retrieve(request, *args, **kwargs)
 
 
-class TagAPI(generics.GenericAPIView,
-             mixins.CreateModelMixin,
+class TagAIP(generics.GenericAPIView,
              mixins.RetrieveModelMixin,
              mixins.DestroyModelMixin,
              ):
@@ -33,11 +34,7 @@ class TagAPI(generics.GenericAPIView,
     serializer_class = TagSerializer
 
     def get(self, request, *args, **kwargs):
-        return self.retrieve(self, request, *args, **kwargs)
+        return self.retrieve(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
-
-
-class TagCreateAPI(generics.CreateAPIView):
-    serializer_class = TagSerializer
+        return self.destroy(request, *args, **kwargs)

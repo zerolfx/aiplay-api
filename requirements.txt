@@ -5,3 +5,4 @@ drfdocs==0.0.11
 djangorestframework-jwt==1.9.0
 PyJWT==1.4.2
 jsonfield
+django-tagging
