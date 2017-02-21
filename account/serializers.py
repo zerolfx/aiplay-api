@@ -28,13 +28,13 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-class UserAbstractView(serializers.ModelSerializer):
+class UserAbstractSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'avatar', 'about')
 
 
-class UserDetailView(serializers.ModelSerializer):
+class UserDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'avatar', 'about', 'birth_date', 'country', 'city', 'organization')

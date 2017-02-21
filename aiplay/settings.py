@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # installed app
     'account',
     'problem',
+    'submission',
 
     # third party package
     'corsheaders',
