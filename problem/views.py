@@ -10,6 +10,11 @@ class ProblemCreateAPI(generics.CreateAPIView):
     serializer_class = ProblemSerializer
 
 
+class ProblemListAPI(generics.ListAPIView):
+    queryset = Problem.objects.all()
+    serializer_class = ProblemSerializer
+
+
 class ProblemDetailAPI(generics.GenericAPIView,
                        mixins.RetrieveModelMixin,
                        mixins.UpdateModelMixin,

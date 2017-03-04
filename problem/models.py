@@ -6,12 +6,11 @@ from tagging.fields import TagField
 
 
 def get_default_properties():
-    return json.dumps({"properties": {"max_time": 1000,
-                                      "max_sum_time": 10000,
-                                      "max_memory": 256
-                                      }
-                       }
-                      )
+    return json.dumps({"max_time": 1000,
+                       "max_sum_time": 10000,
+                       "max_memory": 256
+                      }
+                     )
 STATUS_CHOICES = (
     ('r', 'Removed'),
     ('a', 'Available'),
