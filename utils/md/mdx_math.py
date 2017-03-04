@@ -1,6 +1,6 @@
 import markdown
 from markdown.util import etree
-from katex import convert
+from . import katex
 
 
 class MathExtension(markdown.extensions.Extension):
@@ -13,7 +13,7 @@ class MathExtension(markdown.extensions.Extension):
     def extendMarkdown(self, md, md_globals):
         def handle_match(m):
             text = m.group(3)
-            return etree.fromstring(convert(text))
+            return etree.fromstring(katex.convert(text))
 
 
         inlinemathpatterns = (

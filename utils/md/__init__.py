@@ -1,6 +1,6 @@
 import markdown
-import mdx_math
-import mdx_downheader
+from . import mdx_math
+from . import mdx_downheader
 
 
 def convert(text):
