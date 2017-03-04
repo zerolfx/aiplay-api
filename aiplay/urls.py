@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^account/', include('account.urls', namespace='accounts')),
     url(r'^problem/', include('problem.urls', namespace='problem')),
     url(r'^submission/', include('submission.urls', namespace='submission')),
+    url(r'^utils/', include('utils.urls')),
 
     # third party
     url(r'^docs/', include('rest_framework_docs.urls')),

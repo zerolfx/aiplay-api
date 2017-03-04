@@ -6,3 +6,4 @@ djangorestframework-jwt==1.9.0
 PyJWT==1.4.2
 jsonfield
 django-tagging
+markdown
