@@ -25,10 +25,13 @@ class Problem(models.Model):
     id = models.IntegerField('#', primary_key=True)
 #     tags = TagField()
     title = models.CharField('Title', max_length=70)
-    properties = JSONField('properties', default=get_default_properties)
+    # properties = JSONField('properties', default=get_default_properties)
     status = models.CharField('Status', max_length=1, choices=STATUS_CHOICES, default='a')
     create_time = models.DateTimeField(auto_now_add=True)
     last_update_time = models.DateTimeField(auto_now=True)
+    max_time = models.IntegerField(default=1000)
+    max_sum_time = models.IntegerField(default=100000)
+    max_memory = models.IntegerField(default=256)
 
     def __str__(self):
         return "{} - {}".format(str(self.id), self.title)
